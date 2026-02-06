@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formulário de Cadastro</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Formulário de Cadastro</h1>
+  </header>
+
+  <main aria-labelledby="titulo-dados-pessoais">
+      <form id="formCadastro">
+        <section class="section-dados">
+
+          <p>Dados pessoais</p>
+          
+          <div class="campo">
+            <label for="nome">Nome <span class="required">*</span></label><br>
+            <input type="text" id="nome" required>
+            <small class="erro"></small>
+          </div>
+
+          <div class="campo">
+            <label for="sobrenome">Sobrenome</label><br>
+            <input type="text" id="sobrenome">
+            <small class="erro"></small>
+          </div>
+          
+          <div class="campo">
+            <label for="cpf" >CPF <span class="required">*</span></label><br>
+            <input type="text" id="cpf" maxlength="11" required>
+            <small class="erro"></small>
+          </div>
+
+          <div class="campo">
+            <label for="nascimento">Data de Nascimento <span class="required">*</span></label> <br>
+            <input type="text" id="nascimento" placeholder="___ /_____ / ___" maxlength="10" required>
+            <small class="erro"></small>
+          </div>
+          
+          <div class="campo">
+            <label for="data">Telefone <span class="required">*</span></label> <br>
+            <input type="number" id="data" placeholder="(00) 0000-0000" maxlength="11" required>
+            <small class="erro"></small>
+          </div>
+          
+          
+          
+          <div class="campo">
+            <label for="sexo">Sexo <span class="required">*</span></label> <br>
+            <select id="sexo" required>
+              <option value="">Selecione</option>
+              <option value="M">Masculino</option>
+              <option value="F">Feminino</option>
+            </select>
+            <small class="erro"></small>
+          </div>
+        </section>
+
+        <br>
+
+        <section class="section-endereco">
+          <p>Endereço</p>
+
+          <div class="campo">
+            <label for="rua">Rua <span class="required">*</span></label> <br>
+            <input type="text" id="rua">
+            <small class="erro"></small>
+
+          </div>
+          <div class="campo">
+            <label for="numero">Numero <span class="required">*</span></label><br>
+            <input type="number" id="numero-endereco" required>
+            <small class="erro"></small> 
+          </div>
+
+          <div class="campo">
+            <label for="bairro">complemento</label> <br>
+            <input type="text" id="complemento">
+            <small class="erro"></small>
+          </div>
+          
+          <div class="campo">
+            <label for="bairro">Bairro</label> <br>
+            <input type="text" id="bairro">
+            <small class="erro"></small>
+          </div>
+          
+          <div class="campo">
+            <label for="cep">CEP <span class="required">*</span></label> <br>
+            <input type="text" id="cep" maxlength="8" required placeholder="00000-000">
+            <small class="erro"></small>
+          </div>
+          
+          
+          
+          
+          <div class="campo">
+            <label for="cidade">Cidade <span class="required">*</span></label> <br>
+            <input type="text" id="cidade">
+            <small class="erro"></small> 
+          </div>
+          
+          <div class="campo">
+            <label for="estado">Estado <span class="required">*</span></label> <br>
+            <select id="estado" required>
+              <option value="">Selecione</option>
+              <option>PI</option>
+              <option>CE</option>
+              <option>MA</option>
+              <option>AL</option>
+            </select>
+            <small class="erro"></small>
+          </div>
+          
+          <div class="ncep"><a href="#" id="naoSeiCep">Não sei meu CEP</a></div>
+        </section>
+        <br>
+        
+        <section class="section-senha">
+          <p>Senha</p>
+          <br>
+          <div class="campo senha-box">
+            <label for="apelido">Apelido <span class="required">*</span></label> <br>
+            <input type="text" id="apelido" required>
+            <small class="erro"></small>
+          </div>
+
+          <div class="campo senha-box">
+            <label for="email">email <span class="required">*</span></label> <br>
+            <input type="email" id="email" required>
+            <small class="erro"></small>
+          </div>
+
+          <div class="campo senha-box">
+            <label for="senha">Definir sua senha <span class="required">*</span></label> <br>
+            <input type="password" id="senha" required >
+            <button type="button" class="eye" data-target="senha" aria-label="Mostrar ou ocultar senha">🐵</button>
+            <small class="erro"></small>
+          </div>
+          
+          <div class="campo senha-box">
+            <label for="senha2">Repetir senha <span class="required">*</span></label> <br>
+            <input type="password" id="senha2" required>
+            <button type="button" class="eye" data-target="senha" aria-label="Mostrar ou ocultar senha">🐵</button>
+            <small class="erro"></small>
+          </div>
+          
+          <div class="campo-intrucao">
+            <ul>
+              <li>A senha de no mínimo 8 caracteres</li>
+              <li>Deve conter uma letra maiúscula.</li>
+              <li>Deve conter uma letra minúscula.</li>
+              <li>Deve conter um número.</li>
+              <li>Deve conter um caractere especial</li>
+            </ul>
+          </div>
+
+          <button type="submit" id="btnEnviar">Enviar</button>
+        </section>
+      </form>
+
+  </main>
+
+
+      <div class="div-footer">
+          <footer>
+            <p><time id="ano"></time>Todos os direitos reservados. 2026</p>
+          </footer>
+      </div>
+
+</body>
+</html>
