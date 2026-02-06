@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bem-vindo</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const data = JSON.parse(localStorage.getItem('usuarioData'));
+            document.getElementById('apelido').textContent = data.apelido;
+        });
+    </script>
+</head>
+<link rel="stylesheet" href="styles.css">
+<body>
+
+    <h1 id="bemvindo">Bem-vindo!</h1>
+    <p id="maior">Olá, <span id="apelido"></span>!</p>
+    <a href="index.html" id="voltar">Voltar</a>  
+</body>
+</html>
