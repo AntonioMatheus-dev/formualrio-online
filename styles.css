@@ -26,7 +26,6 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
 }
 
 body {
@@ -50,14 +49,12 @@ header h1 {
   padding: 15px 20px;
   box-sizing: border-box;
   width: 100%;
-  max-width: 900px;
+  max-width: 750px;
   background-color: var(--cinza-claro);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 
 }
-
-
 
 
 section{
@@ -116,7 +113,7 @@ section > p {
 
 .campo-intrucao{
     font-size: 12px;
-    padding: 18px;
+    padding: 15px;
     width: 300px;
     height: 100px;
     position: absolute;
@@ -378,3 +375,33 @@ a:hover{
   border-color: red !important;
   box-shadow: 0 0 5px rgba(255, 0, 0, 0.4);
 }
+
+@media (min-width: 1200px) {
+
+  #nome,
+  #sobrenome {
+    width: 220px;
+  }
+
+  #cpf,
+  #nascimento {
+    width: 180px;
+  }
+
+  #telefone {
+    width: 200px;
+  }
+
+  #rua {
+    width: 320px;
+  }
+
+  #bairro {
+    width: 200px;
+  }
+
+  #cidade {
+    width: 180px;
+  }
+}
+
