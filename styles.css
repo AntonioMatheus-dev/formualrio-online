@@ -26,6 +26,7 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
 }
 
 body {
@@ -48,12 +49,15 @@ header h1 {
 #formCadastro {
   padding: 15px 20px;
   box-sizing: border-box;
-  width: 700px;
+  width: 100%;
+  max-width: 900px;
   background-color: var(--cinza-claro);
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 
 }
+
+
 
 
 section{
@@ -112,7 +116,7 @@ section > p {
 
 .campo-intrucao{
     font-size: 12px;
-    padding: 15px;
+    padding: 18px;
     width: 300px;
     height: 100px;
     position: absolute;
