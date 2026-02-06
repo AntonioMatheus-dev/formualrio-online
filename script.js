@@ -50,25 +50,70 @@ document.addEventListener("DOMContentLoaded", function () {
     validateField("cep");
   });
 
-  // Link "Não sei meu CEP"
-  document.getElementById("naoSeiCep").addEventListener("click", function (e) {
-    e.preventDefault();
-    const cep = prompt("Digite seu CEP (apenas números):");
-    if (cep && /^\d{8}$/.test(cep)) {
-      fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (!data.erro) {
-            document.getElementById("rua").value = data.logradouro;
-            document.getElementById("bairro").value = data.bairro;
-            document.getElementById("cidade").value = data.localidade;
-            document.getElementById("estado").value = data.uf;
-          } else {
-            showError("cep", "CEP não encontrado");
+  // Modal "Não sei meu CEP"
+  const modal = document.getElementById("modalCep");
+  const lista = document.getElementById("listaCeps");
+
+  if (document.getElementById("naoSeiCep")) {
+    document.getElementById("naoSeiCep").addEventListener("click", function (e) {
+      e.preventDefault();
+     if (modal) modal.style.display = "block";
+    });
+  }
+
+  if (document.getElementById("fecharModal")) {
+    document.getElementById("fecharModal").addEventListener("click", () => {
+      if (modal) modal.style.display = "none";
+      lista.innerHTML = "";
+    });
+  }
+
+  // Buscar CEP pela ViaCEP (lista)
+  if (document.getElementById("buscarCep")) {
+    document.getElementById("buscarCep").addEventListener("click", () => {
+      const uf = document.getElementById("buscaUF").value.trim().toUpperCase();
+      const cidade = document.getElementById("buscaCidade").value.trim();
+      const rua = document.getElementById("buscaRua").value.trim();
+
+      if (!uf || !cidade || !rua) {
+        alert("Preencha UF, cidade e rua");
+        return;
+      }
+
+      fetch(`https://viacep.com.br/ws/${uf}/${cidade}/${rua}/json/`)
+        .then(res => res.json())
+        .then(dados => {
+          lista.innerHTML = "";
+
+          if (dados.length === 0 || dados.erro) {
+            lista.innerHTML = "<li>Nenhum CEP encontrado</li>";
+            return;
           }
-        }).catch(() => showError("cep", "Erro ao consultar CEP"));
-    }
-  });
+
+          dados.forEach(item => {
+            const li = document.createElement("li");
+            li.textContent = `${item.logradouro} - ${item.bairro} | CEP: ${item.cep}`;
+
+            li.addEventListener("click", () => {
+              document.getElementById("cep").value = item.cep.replace("-", "");
+              document.getElementById("rua").value = item.logradouro;
+              document.getElementById("bairro").value = item.bairro;
+              document.getElementById("cidade").value = item.localidade;
+              document.getElementById("estado").value = item.uf;
+
+              validateField("cep");
+              modal.style.display = "none";
+              lista.innerHTML = "";
+            });
+
+            lista.appendChild(li);
+          });
+        })
+        .catch(() => {
+          lista.innerHTML = "<li>Erro ao buscar CEP</li>";
+        });
+    });
+  }
 
   // Validação do formulário
   document.getElementById("formCadastro").addEventListener("submit", function (e) {e.preventDefault();
@@ -99,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     "nome",
     "cpf",
     "nascimento",
-    "data",
+    "telefone",
     "sexo",
     "rua",
     "numero-endereco",
@@ -126,7 +171,7 @@ function validateAllFields() {
     "nome",
     "cpf",
     "nascimento",
-    "data",
+    "telefone",
     "sexo",
     "rua",
     "numero-endereco",
@@ -202,37 +247,33 @@ function validateField(fieldId) {
 // Validação específica da senha
 function validateSenha() {
   const senha = document.getElementById("senha").value;
-  const error = document.getElementById("senha").parentNode.querySelector(".erro");
-
-  if (!senha) {
-    showError("senha", "Senha é obrigatória");
-    return false;
-  }
-
-  let valid = true;
   let errors = [];
 
   if (senha.length < 8) {
     errors.push("mínimo 8 caracteres");
-    valid = false;
-  }else if (!/[A-Z]/.test(senha)) {
-    errors.push("1 maiúscula");
-    valid = false;
-  }else if (!/[0-9]/.test(senha)) {
-    errors.push("1 número");
-    valid = false;
-  }else if (!/[.!@#$%^&*]/.test(senha)) {
-    errors.push("1 caractere especial");
-    valid = false;
   }
-  if (!valid) {
-    showError("senha", `Senha deve ter: ${errors.join(", ")}`);
-  } else {
-    clearError("senha");
+  if (!/[A-Z]/.test(senha)) {
+    errors.push("1 letra maiúscula");
+  }
+  if (!/[a-z]/.test(senha)) {
+    errors.push("1 letra minúscula");
+  }
+  if (!/[0-9]/.test(senha)) {
+    errors.push("1 número");
+  }
+  if (!/[.!@#$%^&*]/.test(senha)) {
+    errors.push("1 caractere especial");
   }
 
-  return valid;
+  if (errors.length > 0) {
+    showError("senha", `Falta: ${errors.join(", ")}`);
+    return false;
+  } else {
+    clearError("senha");
+    return true;
+  }
 }
+
 
 // Validação repetição senha
 function validateSenhaRepetida() {
