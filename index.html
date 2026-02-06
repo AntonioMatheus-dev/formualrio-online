@@ -43,7 +43,7 @@
           
           <div class="campo">
             <label for="data">Telefone <span class="required">*</span></label> <br>
-            <input type="number" id="data" placeholder="(00) 0000-0000" maxlength="11" required>
+            <input type="text" id="telefone" placeholder="(00) 0000-0000" maxlength="11" required>
             <small class="erro"></small>
           </div>
           
@@ -72,7 +72,7 @@
 
           </div>
           <div class="campo">
-            <label for="numero">Numero <span class="required">*</span></label><br>
+            <label for="numero-endereco">Numero <span class="required">*</span></label><br>
             <input type="number" id="numero-endereco" required>
             <small class="erro"></small> 
           </div>
@@ -145,7 +145,7 @@
           <div class="campo">
             <label for="senha2">Repetir senha <span class="required">*</span></label> <br>
             <input type="password" id="senha2" required>
-            <button type="button" class="eye" data-target="senha" aria-label="Mostrar ou ocultar senha">🐵</button>
+            <button type="button" class="eye" data-target="senha2" aria-label="Mostrar ou ocultar senha">🐵</button>
             <small class="erro"></small>
           </div>
           
@@ -171,6 +171,21 @@
             <p><time id="ano"></time>Todos os direitos reservados. 2026</p>
           </footer>
       </div>
+
+        <div id="modalCep" class="modal">
+    <div class="modal-content">
+      <span id="fecharModal">&times;</span>
+      <h3>Buscar CEP</h3>
+
+      <input type="text" id="buscaUF" placeholder="UF (ex: PI)">
+      <input type="text" id="buscaCidade" placeholder="Cidade">
+      <input type="text" id="buscaRua" placeholder="Rua">
+
+      <button type="button" id="buscarCep">Buscar</button>
+
+      <ul id="listaCeps"></ul>
+    </div>
+  </div>
 
 </body>
 </html>
